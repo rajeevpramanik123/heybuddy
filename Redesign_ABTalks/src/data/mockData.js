@@ -10,6 +10,7 @@ export const MOCK_STUDENT = {
   rank: 143,
   totalStudents: 10420,
   topPercentile: "Top 18%",
+  percentile: 18,
   recruiterReadiness: 68,
   xp: 1420,
   githubLink: "https://github.com/aarav-sharma-dev",
@@ -18,7 +19,8 @@ export const MOCK_STUDENT = {
   streakFreezeAvailable: true,
   streakFreezeActive: true,
   momentumScore: "🔥 Fire Momentum (100% Consistent)",
-  portfolioProjectsCount: 4
+  portfolioProjectsCount: 4,
+  weeklyConsistency: 100
 };
 
 export const MOCK_ACHIEVEMENTS = [

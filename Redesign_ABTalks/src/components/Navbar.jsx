@@ -132,7 +132,7 @@ export default function Navbar({ student, userAuth, openLinkModal, isNightMode, 
               {/* Security Shield Indicator */}
               <div 
                 onClick={openLinkModal}
-                title={isLinked ? "OAuth & GitHub SHA Verified - Tamper Proof" : "Click to link accounts and verify commits"} 
+                title={isLinked ? "GitHub SHA Verification (Upcoming V2 Roadmap)" : "Click to link accounts"} 
                 className={`hidden sm:flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold cursor-pointer ${
                   isLinked 
                     ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' 

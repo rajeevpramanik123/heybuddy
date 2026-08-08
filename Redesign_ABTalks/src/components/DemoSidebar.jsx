@@ -77,9 +77,6 @@ export default function DemoSidebar({
       {/* Control Panel Body (Always visible on desktop md+, collapsible on mobile <md) */}
       <div className={`${mobileExpanded ? 'block' : 'hidden md:block'} space-y-3 animate-fade-in`}>
         
-        <p className="text-[11px] text-gray-400 leading-snug">
-          Select a student state to evaluate edge cases on mobile (390px) & desktop:
-        </p>
 
         {lockedNotice && (
           <div className="p-2 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-200 text-[10px] font-semibold animate-fade-in">

@@ -119,6 +119,7 @@ export default function App() {
                 <LandingPage 
                   openLinkModal={() => setLinkModalOpen(true)} 
                   userAuth={userAuth} 
+                  student={student}
                 />
               } 
             />

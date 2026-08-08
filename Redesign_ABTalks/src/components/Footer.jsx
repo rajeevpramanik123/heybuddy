@@ -27,9 +27,9 @@ export default function Footer() {
               Commit code daily, build a public portfolio, and become recruiter-ready in 60 days.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <div className="flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Encrypted SHA-256 Certificates & OAuth Verification</span>
+              <div className="flex items-center gap-1.5 text-xs text-amber-300 bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/20">
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+                <span>SHA-256 Certificates & OAuth Verification (Upcoming V2)</span>
               </div>
             </div>
           </div>
