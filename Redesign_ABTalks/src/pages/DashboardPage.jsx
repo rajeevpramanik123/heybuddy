@@ -665,38 +665,70 @@ export default function DashboardPage({
                       <Award className="w-5 h-5 text-purple-400" />
                       <h3 className="font-bold text-white text-sm font-heading">Student Leaderboard</h3>
                     </div>
-                    <span className="text-xs text-purple-300 font-semibold">{student.topPercentile}</span>
+                    <span className={`text-xs font-semibold ${!isLinked ? 'text-amber-400 font-bold' : 'text-purple-300'}`}>
+                      {!isLinked ? '🔒 Unranked' : student.topPercentile}
+                    </span>
                   </div>
 
                   <div className="space-y-2">
-                    {MOCK_LEADERBOARD.map((item) => (
-                      <div
-                        key={item.rank}
-                        className={`flex items-center justify-between p-2.5 rounded-xl border text-xs ${
-                          item.isUser
-                            ? 'bg-orange-500/15 border-orange-500/40 font-bold'
-                            : 'bg-white/5 border-white/5'
-                        }`}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <span className={`w-5 text-center font-bold ${item.rank <= 3 ? 'text-amber-400' : 'text-gray-400'}`}>
-                            #{item.rank}
-                          </span>
-                          <img src={item.avatar} alt={item.name} className="w-7 h-7 rounded-full object-cover" />
-                          <div>
-                            <p className="text-white font-medium">{item.name}</p>
-                            <p className="text-[10px] text-gray-400">{item.college}</p>
+                    {MOCK_LEADERBOARD.map((item) => {
+                      if (item.isUser && !isLinked) {
+                        return (
+                          <div
+                            key="unlinked_user"
+                            onClick={openLinkModal}
+                            className="flex items-center justify-between p-2.5 rounded-xl border text-xs bg-amber-500/10 border-amber-500/30 text-amber-300 font-medium cursor-pointer hover:bg-amber-500/20 transition"
+                            title="Click to link GitHub & LinkedIn to join student leaderboard"
+                          >
+                            <div className="flex items-center gap-2.5">
+                              <span className="w-5 text-center font-bold text-gray-500">#-</span>
+                              <div className="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs">
+                                ?
+                              </div>
+                              <div>
+                                <p className="text-white font-bold">Unlinked Student (You)</p>
+                                <p className="text-[10px] text-amber-300/80">Link Git & LinkedIn to join rank</p>
+                              </div>
+                            </div>
+
+                            <div className="text-right">
+                              <span className="text-[10px] font-bold bg-amber-500/20 px-2 py-0.5 rounded text-amber-300">
+                                🔒 Unranked
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <div
+                          key={item.rank}
+                          className={`flex items-center justify-between p-2.5 rounded-xl border text-xs ${
+                            item.isUser && isLinked
+                              ? 'bg-orange-500/15 border-orange-500/40 font-bold'
+                              : 'bg-white/5 border-white/5'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className={`w-5 text-center font-bold ${item.rank <= 3 ? 'text-amber-400' : 'text-gray-400'}`}>
+                              #{item.rank}
+                            </span>
+                            <img src={item.avatar} alt={item.name} className="w-7 h-7 rounded-full object-cover" />
+                            <div>
+                              <p className="text-white font-medium">{item.name}</p>
+                              <p className="text-[10px] text-gray-400">{item.college}</p>
+                            </div>
+                          </div>
+
+                          <div className="text-right">
+                            <p className="text-orange-400 font-bold flex items-center justify-end gap-1">
+                              <Flame className="w-3 h-3" /> {item.streak}d
+                            </p>
+                            <p className="text-[10px] text-gray-400">{item.xp} XP</p>
                           </div>
                         </div>
-
-                        <div className="text-right">
-                          <p className="text-orange-400 font-bold flex items-center justify-end gap-1">
-                            <Flame className="w-3 h-3" /> {item.streak}d
-                          </p>
-                          <p className="text-[10px] text-gray-400">{item.xp} XP</p>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </section>
 

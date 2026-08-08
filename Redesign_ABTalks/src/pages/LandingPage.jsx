@@ -48,15 +48,8 @@ export default function LandingPage({ openLinkModal, userAuth, student }) {
               Build real projects. Push daily GitHub commits. Publish LinkedIn proof. Become recruiter-ready before graduation.
             </p>
 
-            {/* Primary Hero CTA & Security Badge */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button 
-                onClick={handleStartChallenge} 
-                className="btn-primary w-full sm:w-auto text-base px-8 py-3.5 flex items-center justify-center gap-2 cursor-pointer font-bold shadow-xl shadow-orange-500/20"
-              >
-                <span>Start My 60-Day Journey</span> <ArrowRight className="w-5 h-5" />
-              </button>
-
+            {/* Hero Security Badge */}
+            <div className="pt-2 flex items-center justify-center lg:justify-start">
               <div className="inline-flex items-center gap-1.5 text-xs text-amber-300 bg-amber-500/10 px-3.5 py-2 rounded-full border border-amber-500/20 shrink-0">
                 <ShieldCheck className="w-4 h-4 text-amber-400" />
                 <span>Verification & Security (Upcoming V2)</span>
