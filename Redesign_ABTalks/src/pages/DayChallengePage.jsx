@@ -29,7 +29,6 @@ export default function DayChallengePage({
 }) {
   // Submission Form State
   const [githubRepo, setGithubRepo] = useState('');
-  const [commitSha, setCommitSha] = useState('');
   const [linkedinPost, setLinkedinPost] = useState('');
   
   // Checklist State
@@ -56,16 +55,12 @@ export default function DayChallengePage({
       setErrorMessage('Please enter a valid GitHub Repository URL (e.g., https://github.com/username/repo)');
       return;
     }
-    if (!commitSha.trim() || commitSha.trim().length < 7) {
-      setErrorMessage('Please enter a valid GitHub Commit SHA hash (minimum 7 characters)');
-      return;
-    }
     if (!linkedinPost.trim() || !linkedinPost.includes('linkedin.com')) {
       setErrorMessage('Please enter a valid LinkedIn Post URL');
       return;
     }
 
-    // Simulate OAuth & Commit verification
+    // Simulate verification
     setSubmissionStatus('SUBMITTING');
 
     setTimeout(() => {
@@ -310,11 +305,11 @@ export default function DayChallengePage({
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold font-heading text-white">Day 12 Task Verified & Locked! 🎉</h3>
+                  <h3 className="text-lg font-bold font-heading text-white">Today's Task Verified & Locked! 🎉</h3>
                   <p className="text-xs text-emerald-300">
                     {isFreezeActive 
-                      ? "Streak Freeze applied & Day 12 task verified successfully."
-                      : "Fresh Streak Started! Day 12 task submitted as Day 1 of new streak flame."}
+                      ? "Streak Freeze applied & task verified successfully."
+                      : "Fresh Streak Started! Task submitted as Day 1 of new streak flame."}
                   </p>
                 </div>
               </div>
@@ -361,7 +356,7 @@ export default function DayChallengePage({
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-              <p className="text-xs text-gray-300">Your GitHub commit SHA & LinkedIn proof are cryptographically signed.</p>
+              <p className="text-xs text-gray-300">Your GitHub repository & LinkedIn proof are verified.</p>
               <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-xs py-2.5 px-5 bg-gradient-to-r from-emerald-600 to-orange-600 font-bold">
                 View Dashboard & Updated Heatmap →
               </Link>
@@ -413,22 +408,6 @@ export default function DayChallengePage({
             />
           </div>
 
-          {/* GitHub Commit SHA */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-              <Code2 className="w-4 h-4 text-emerald-400" /> GitHub Commit SHA Hash *
-            </label>
-            <input
-              type="text"
-              required
-              value={commitSha}
-              onChange={(e) => setCommitSha(e.target.value)}
-              placeholder="e.g. a1b2c3d4e5f67890 (Used for OAuth Anti-Cheat Verification)"
-              className="w-full bg-black/40 border border-white/10 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition"
-              disabled={submissionStatus === 'VERIFIED'}
-            />
-          </div>
-
           {/* LinkedIn Post URL */}
           <div className="space-y-1.5">
             <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
@@ -445,24 +424,24 @@ export default function DayChallengePage({
             />
           </div>
 
-          {/* Submit Button */}
-          <div className="pt-2 flex items-center justify-between">
-            <div className="text-[11px] text-gray-400 flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Safe SSL Encrypted
-            </div>
+          {/* Submit Button & Simple Progress Note */}
+          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p className="text-[11px] text-gray-400">
+              Your GitHub and LinkedIn links help record your progress.
+            </p>
 
             <button
               type="submit"
               disabled={submissionStatus === 'SUBMITTING' || submissionStatus === 'VERIFIED'}
-              className="btn-primary py-3 px-6 text-xs bg-gradient-to-r from-emerald-600 to-orange-600 hover:from-emerald-500 hover:to-orange-500 disabled:opacity-50"
+              className="btn-primary py-3 px-6 text-xs bg-gradient-to-r from-emerald-600 to-orange-600 hover:from-emerald-500 hover:to-orange-500 disabled:opacity-50 shrink-0"
             >
               {submissionStatus === 'SUBMITTING' ? (
-                <span>Syncing GitHub OAuth...</span>
+                <span>Verifying...</span>
               ) : submissionStatus === 'VERIFIED' ? (
                 <span>Completed & Verified ✓</span>
               ) : (
                 <span className="flex items-center gap-1.5">
-                  <Send className="w-4 h-4" /> Submit Day 12 & Lock Flame
+                  <Send className="w-4 h-4" /> Submit Today's Proof
                 </span>
               )}
             </button>
