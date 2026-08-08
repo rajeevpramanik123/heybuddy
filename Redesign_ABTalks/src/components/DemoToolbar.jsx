@@ -18,7 +18,6 @@ export default function DemoToolbar({
       </div>
 
       <div className="flex items-center gap-1.5 shrink-0">
-        {/* Standard Active Day 12 */}
         <button
           onClick={() => setStudentState('ACTIVE_DAY12')}
           className={`px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition ${
@@ -28,7 +27,7 @@ export default function DemoToolbar({
           }`}
         >
           <Flame className="w-3 h-3 text-orange-300" />
-          Active (Day 12)
+          Active Session
         </button>
 
         {/* New Student */}

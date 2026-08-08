@@ -98,7 +98,7 @@ export default function DemoSidebar({
           >
             <Flame className="w-4 h-4 text-orange-300 shrink-0" />
             <div>
-              <p className="text-xs font-bold">Active Session (Day 12)</p>
+              <p className="text-xs font-bold">Active Session</p>
               <p className="text-[10px] opacity-80 font-normal">Active streak & streak freezes</p>
             </div>
           </button>
