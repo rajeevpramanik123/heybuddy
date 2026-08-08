@@ -11,7 +11,7 @@ export default function Footer() {
     <>
       {/* Desktop & Standard Footer */}
       <footer className="mt-auto border-t border-white/10 bg-slate-950/80 backdrop-blur-md pt-10 pb-16 px-4">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
           
           <div className="space-y-3 md:col-span-2">
             <div className="flex items-center gap-2">

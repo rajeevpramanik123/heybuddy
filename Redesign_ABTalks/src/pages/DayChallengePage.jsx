@@ -124,154 +124,163 @@ export default function DayChallengePage({
         </span>
       </div>
 
-      {/* Challenge Header Card (Updates dynamically when verified!) */}
-      <section className={`glass-card p-6 space-y-4 border-2 transition-all ${
-        submissionStatus === 'VERIFIED'
-          ? 'border-emerald-500/50 bg-emerald-950/20 shadow-xl'
-          : 'border-orange-500/30'
-      }`}>
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-          {submissionStatus === 'VERIFIED' ? (
-            <span className="pill-badge pill-emerald font-bold flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> DAY 12 COMPLETED & VERIFIED 🎉
-            </span>
-          ) : (
-            <span className="pill-badge pill-orange font-bold">
-              🔥 DAY 12 CHALLENGE
-            </span>
-          )}
-
-          <span className="pill-badge pill-purple font-bold">
-            {MOCK_DAY_12_CHALLENGE.difficulty} Level
-          </span>
-        </div>
-
-        <div className="space-y-2">
-          <h1 className="text-2xl sm:text-3xl font-black text-white font-heading">
-            {MOCK_DAY_12_CHALLENGE.title}
-          </h1>
-          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-            {MOCK_DAY_12_CHALLENGE.description}
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 pt-2 border-t border-white/10">
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4 text-orange-400" />
-            <span>Est. Time: <strong className="text-white">{MOCK_DAY_12_CHALLENGE.estTime}</strong></span>
-          </div>
-          <div>
-            <span>XP Reward: <strong className="text-amber-400">+{MOCK_DAY_12_CHALLENGE.xpReward} XP</strong></span>
-          </div>
-          <div>
-            <span>Badge Unlock: <strong className="text-purple-400">{MOCK_DAY_12_CHALLENGE.badgeUnlock}</strong></span>
-          </div>
-          {submissionStatus === 'VERIFIED' && (
-            <div className="text-emerald-400 font-bold flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4" /> Status: Verified ✓
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Interactive Live Kanban Sandbox Widget */}
-      <LiveKanbanSandbox />
-
-      {/* Learning Objectives & Requirements */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* 2-Column Desktop Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         
-        {/* Objectives */}
-        <section className="glass-card p-5 space-y-3">
-          <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
-            <Code2 className="w-4 h-4 text-orange-400" /> Learning Objectives
-          </h3>
-          <ul className="space-y-2 text-xs text-gray-300">
-            {(MOCK_DAY_12_CHALLENGE.learningObjectives || []).map((obj, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="text-orange-400 font-bold">•</span>
-                <span>{obj}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+        {/* Left Column: Challenge Header, Sandbox, Objectives & Guide */}
+        <div className="lg:col-span-7 space-y-6">
+          
+          {/* Challenge Header Card */}
+          <section className={`glass-card p-6 space-y-4 border-2 transition-all ${
+            submissionStatus === 'VERIFIED'
+              ? 'border-emerald-500/50 bg-emerald-950/20 shadow-xl'
+              : 'border-orange-500/30'
+          }`}>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+              {submissionStatus === 'VERIFIED' ? (
+                <span className="pill-badge pill-emerald font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> DAY 12 COMPLETED & VERIFIED 🎉
+                </span>
+              ) : (
+                <span className="pill-badge pill-orange font-bold">
+                  🔥 DAY 12 CHALLENGE
+                </span>
+              )}
 
-        {/* Requirements */}
-        <section className="glass-card p-5 space-y-3">
-          <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
-            <CheckSquare className="w-4 h-4 text-emerald-400" /> Requirements Checklist
-          </h3>
-          <ul className="space-y-2 text-xs text-gray-300">
-            {(MOCK_DAY_12_CHALLENGE.requirements || []).map((req, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <span className="text-emerald-400 font-bold">✓</span>
-                <span>{req}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+              <span className="pill-badge pill-purple font-bold">
+                {MOCK_DAY_12_CHALLENGE.difficulty} Level
+              </span>
+            </div>
 
-      </div>
+            <div className="space-y-2">
+              <h1 className="text-2xl sm:text-3xl font-black text-white font-heading">
+                {MOCK_DAY_12_CHALLENGE.title}
+              </h1>
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                {MOCK_DAY_12_CHALLENGE.description}
+              </p>
+            </div>
 
-      {/* Step-by-Step Interactive Implementation Checklist */}
-      <section className="glass-card p-5 space-y-4">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
-          <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Interactive Step-by-Step Guide
-          </h3>
-          <span className="text-xs text-emerald-400 font-semibold">
-            {checkedItems.length} / {(MOCK_DAY_12_CHALLENGE.checklist || []).length} Done
-          </span>
-        </div>
-
-        <div className="space-y-2">
-          {(MOCK_DAY_12_CHALLENGE.checklist || []).map((item) => {
-            const isChecked = checkedItems.includes(item.id);
-            return (
-              <div
-                key={item.id}
-                onClick={() => toggleChecklist(item.id)}
-                className={`p-3 rounded-xl border flex items-center gap-3 cursor-pointer transition ${
-                  isChecked
-                    ? 'bg-emerald-500/10 border-emerald-500/30 text-white'
-                    : 'bg-white/5 border-white/5 text-gray-300 hover:bg-white/10'
-                }`}
-              >
-                <div className={`w-5 h-5 rounded-md flex items-center justify-center border transition ${
-                  isChecked ? 'bg-emerald-500 border-emerald-400 text-white' : 'border-gray-500 bg-black/20'
-                }`}>
-                  {isChecked && <CheckCircle2 className="w-3.5 h-3.5" />}
-                </div>
-
-                <span className="text-xs font-medium flex-1">{item.text}</span>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-gray-400 pt-2 border-t border-white/10">
+              <div className="flex items-center gap-1">
+                <Clock className="w-4 h-4 text-orange-400" />
+                <span>Est. Time: <strong className="text-white">{MOCK_DAY_12_CHALLENGE.estTime}</strong></span>
               </div>
-            );
-          })}
-        </div>
-      </section>
+              <div>
+                <span>XP Reward: <strong className="text-amber-400">+{MOCK_DAY_12_CHALLENGE.xpReward} XP</strong></span>
+              </div>
+              <div>
+                <span>Badge Unlock: <strong className="text-purple-400">{MOCK_DAY_12_CHALLENGE.badgeUnlock}</strong></span>
+              </div>
+              {submissionStatus === 'VERIFIED' && (
+                <div className="text-emerald-400 font-bold flex items-center gap-1">
+                  <CheckCircle2 className="w-4 h-4" /> Status: Verified ✓
+                </div>
+              )}
+            </div>
+          </section>
 
-      {/* Resource Links */}
-      <section className="glass-card p-5 space-y-3">
-        <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
-          <BookOpen className="w-4 h-4 text-blue-400" /> Recommended Learning Resources
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {(MOCK_DAY_12_CHALLENGE.resources || []).map((res, idx) => (
-            <a
-              key={idx}
-              href={res.url}
-              target="_blank"
-              rel="noreferrer"
-              className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between text-xs text-gray-300 hover:text-white transition"
-            >
-              <span>{res.title}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
-            </a>
-          ))}
-        </div>
-      </section>
+          {/* Interactive Live Kanban Sandbox Widget */}
+          <LiveKanbanSandbox />
 
-      {/* PROOF OF WORK SUBMISSION FORM */}
-      <section className="glass-card p-6 space-y-5 border-2 border-emerald-500/40 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20">
+          {/* Learning Objectives & Requirements */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            {/* Objectives */}
+            <section className="glass-card p-5 space-y-3">
+              <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-orange-400" /> Learning Objectives
+              </h3>
+              <ul className="space-y-2 text-xs text-gray-300">
+                {(MOCK_DAY_12_CHALLENGE.learningObjectives || []).map((obj, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-orange-400 font-bold">•</span>
+                    <span>{obj}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {/* Requirements */}
+            <section className="glass-card p-5 space-y-3">
+              <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
+                <CheckSquare className="w-4 h-4 text-emerald-400" /> Requirements Checklist
+              </h3>
+              <ul className="space-y-2 text-xs text-gray-300">
+                {(MOCK_DAY_12_CHALLENGE.requirements || []).map((req, idx) => (
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-emerald-400 font-bold">✓</span>
+                    <span>{req}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+          </div>
+
+          {/* Step-by-Step Interactive Implementation Checklist */}
+          <section className="glass-card p-5 space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Interactive Step-by-Step Guide
+              </h3>
+              <span className="text-xs text-emerald-400 font-semibold">
+                {checkedItems.length} / {(MOCK_DAY_12_CHALLENGE.checklist || []).length} Done
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              {(MOCK_DAY_12_CHALLENGE.checklist || []).map((item) => {
+                const isChecked = checkedItems.includes(item.id);
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => toggleChecklist(item.id)}
+                    className={`p-3 rounded-xl border flex items-center gap-3 cursor-pointer transition ${
+                      isChecked
+                        ? 'bg-emerald-500/10 border-emerald-500/30 text-white'
+                        : 'bg-white/5 border-white/5 text-gray-300 hover:bg-white/10'
+                    }`}
+                  >
+                    <div className={`w-5 h-5 rounded-md flex items-center justify-center border transition ${
+                      isChecked ? 'bg-emerald-500 border-emerald-400 text-white' : 'border-gray-500 bg-black/20'
+                    }`}>
+                      {isChecked && <CheckCircle2 className="w-3.5 h-3.5" />}
+                    </div>
+
+                    <span className="text-xs font-medium flex-1">{item.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Resource Links */}
+          <section className="glass-card p-5 space-y-3">
+            <h3 className="font-bold text-white text-sm font-heading flex items-center gap-2">
+              <BookOpen className="w-4 h-4 text-blue-400" /> Recommended Learning Resources
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {(MOCK_DAY_12_CHALLENGE.resources || []).map((res, idx) => (
+                <a
+                  key={idx}
+                  href={res.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 flex items-center justify-between text-xs text-gray-300 hover:text-white transition"
+                >
+                  <span>{res.title}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-400" />
+                </a>
+              ))}
+            </div>
+          </section>
+
+        </div>
+
+        {/* Right Column: Sticky Proof of Work Submission Form */}
+        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-20">
+          <section className="glass-card p-6 space-y-5 border-2 border-emerald-500/40 bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20 shadow-xl">
         
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
@@ -458,10 +467,12 @@ export default function DayChallengePage({
               )}
             </button>
           </div>
-
         </form>
 
       </section>
+        </div>
+
+      </div>
 
     </div>
   );

@@ -13,7 +13,7 @@ export default function Navbar({ student, userAuth, openLinkModal, isNightMode, 
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur-md shadow-md">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2 text-decoration-none group">
@@ -114,18 +114,20 @@ export default function Navbar({ student, userAuth, openLinkModal, isNightMode, 
 
               {/* Streak Counter Pill */}
               {isLinked ? (
-                <Link to="/dashboard" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 font-bold text-sm shadow-sm hover:bg-orange-500/25 transition">
-                  <Flame className="w-4 h-4 text-orange-500 flame-animated" />
+                <Link to="/dashboard" className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 font-bold text-xs sm:text-sm shadow-sm hover:bg-orange-500/25 transition shrink-0">
+                  <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-500 flame-animated" />
                   <span>{student.streak} Days</span>
                 </Link>
               ) : (
                 <button 
                   onClick={openLinkModal}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 border border-amber-500/40 text-amber-400 font-bold text-xs shadow-sm hover:bg-slate-700 transition"
+                  className="flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-800 border border-amber-500/40 text-amber-400 font-bold text-[11px] sm:text-xs shadow-sm hover:bg-slate-700 transition shrink-0"
                   title="Streak not recorded for unregistered users. Click to link accounts!"
                 >
-                  <Lock className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Streak Locked 🔒</span>
+                  <Lock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 shrink-0" />
+                  <span className="hidden sm:inline">Streak Locked 🔒</span>
+                  <span className="sm:inline hidden">Streak </span>
+                  <span className="sm:hidden">Locked 🔒</span>
                 </button>
               )}
 

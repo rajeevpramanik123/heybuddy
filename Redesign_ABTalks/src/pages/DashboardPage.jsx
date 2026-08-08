@@ -370,10 +370,10 @@ export default function DashboardPage({
               </div>
 
               {/* Current Streak & Highest Record Pill */}
-              <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+              <div className="grid grid-cols-2 gap-2 w-full sm:flex sm:items-center sm:gap-3 sm:w-auto">
                 <div 
                   onClick={!isLinked ? openLinkModal : streakMode === 'BROKEN' ? () => setStreakMode('REVIVED') : undefined}
-                  className={`glass-card p-3 flex items-center gap-2.5 transition ${
+                  className={`glass-card p-2.5 sm:p-3 flex items-center gap-2 transition ${
                     !isLinked
                       ? 'bg-amber-500/10 border-amber-500/40 cursor-pointer hover:border-amber-500/70'
                       : streakMode === 'BROKEN' 
@@ -382,30 +382,30 @@ export default function DashboardPage({
                   }`}
                   title={!isLinked ? "Click to link GitHub & LinkedIn" : streakMode === 'BROKEN' ? "Click to use Streak Freeze and revive streak to 11 Days!" : undefined}
                 >
-                  <Flame className={`w-6 h-6 ${!isLinked ? 'text-amber-500' : streakMode === 'BROKEN' ? 'text-red-400' : 'text-orange-500 flame-animated'}`} />
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="text-[10px] text-gray-400 uppercase font-semibold">Streak Status</p>
+                  <Flame className={`w-5 h-5 sm:w-6 sm:h-6 shrink-0 ${!isLinked ? 'text-amber-500' : streakMode === 'BROKEN' ? 'text-red-400' : 'text-orange-500 flame-animated'}`} />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-1">
+                      <p className="text-[9px] sm:text-[10px] text-gray-400 uppercase font-semibold truncate">Streak</p>
                       {isLinked && (
-                        <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold font-mono">
-                          Max: {maxStreakRecord}d 🏆
+                        <span className="text-[8px] sm:text-[9px] px-1 rounded bg-amber-500/20 text-amber-300 font-bold font-mono">
+                          {maxStreakRecord}d 🏆
                         </span>
                       )}
                     </div>
-                    <p className={`text-base font-black font-heading ${!isLinked ? 'text-amber-400' : streakMode === 'BROKEN' ? 'text-red-400' : 'text-orange-400'}`}>
-                      {!isLinked ? "🔒 UNRECORDED" : `${streakDays} DAYS ${streakMode === 'BROKEN' ? '⚠️' : '🔥'}`}
+                    <p className={`text-xs sm:text-base font-black font-heading truncate ${!isLinked ? 'text-amber-400' : streakMode === 'BROKEN' ? 'text-red-400' : 'text-orange-400'}`}>
+                      {!isLinked ? "LOCKED 🔒" : `${streakDays} DAYS ${streakMode === 'BROKEN' ? '⚠️' : '🔥'}`}
                     </p>
                   </div>
                 </div>
 
                 <div 
                   onClick={openReadinessModal}
-                  className="glass-card p-3 flex items-center gap-2 bg-indigo-500/10 border-indigo-500/30 cursor-pointer hover:border-indigo-500/60 transition"
+                  className="glass-card p-2.5 sm:p-3 flex items-center gap-2 bg-indigo-500/10 border-indigo-500/30 cursor-pointer hover:border-indigo-500/60 transition"
                   title="Click to view Readiness Score Breakdown"
                 >
-                  <Briefcase className="w-6 h-6 text-indigo-400" />
-                  <div>
-                    <p className="text-[10px] text-gray-400 uppercase font-semibold">Recruiter Readiness</p>
+                  <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[9px] sm:text-[10px] text-gray-400 uppercase font-semibold truncate">Readiness</p>
                     {(() => {
                       let streakScoreFactor = 15;
                       if (!isLinked) streakScoreFactor = 0;
@@ -416,7 +416,7 @@ export default function DashboardPage({
                       else if (streakMode === 'SUBMITTED_WITHOUT_FREEZE') streakScoreFactor = 3;
 
                       const dynamicRecruiterReadiness = !isLinked ? 5 : (80 + streakScoreFactor);
-                      return <p className="text-base font-black text-indigo-300 font-heading">{dynamicRecruiterReadiness}%</p>;
+                      return <p className="text-xs sm:text-base font-black text-indigo-300 font-heading">{dynamicRecruiterReadiness}%</p>;
                     })()}
                   </div>
                 </div>
@@ -445,13 +445,13 @@ export default function DashboardPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             
             {/* Dynamic Momentum Meter */}
-            <div className="glass-card p-4 flex items-center gap-3 bg-gradient-to-r from-orange-950/30 to-slate-900 border-orange-500/30">
-              <div className="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
+            <div className="glass-card p-3.5 sm:p-4 flex items-center gap-3 bg-gradient-to-r from-orange-950/30 to-slate-900 border-orange-500/30">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
                 <Activity className="w-5 h-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-[10px] text-gray-400 uppercase font-semibold">Momentum Meter</p>
-                <p className="text-xs font-bold text-orange-300">
+                <p className="text-xs font-bold text-orange-300 truncate">
                   {isBrokenStreak 
                     ? '⚠️ Momentum Interrupted (Streak 0d)' 
                     : `🔥 ${Math.round((streakDays / 11) * 100)}% High Velocity (${streakDays} Active Days)`}
@@ -460,16 +460,16 @@ export default function DashboardPage({
             </div>
 
             {/* Quick Actions Bar */}
-            <div className="glass-card p-4 flex items-center justify-between gap-2">
+            <div className="glass-card p-3.5 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-2.5">
               <button
                 onClick={openCurriculumModal}
-                className="btn-secondary flex-1 text-xs py-2 px-3 justify-center gap-1.5"
+                className="btn-secondary w-full sm:flex-1 text-xs py-2 px-3 justify-center gap-1.5"
               >
                 <Calendar className="w-4 h-4 text-orange-400" /> View Previous Days
               </button>
               <Link
                 to="/day/12"
-                className="btn-primary flex-1 text-xs py-2 px-3 justify-center gap-1.5"
+                className="btn-primary w-full sm:flex-1 text-xs py-2 px-3 justify-center gap-1.5"
               >
                 Continue Today <ArrowRight className="w-4 h-4" />
               </Link>
@@ -514,13 +514,10 @@ export default function DashboardPage({
               <div>🎖️ Badge Unlock: <strong className="text-purple-400">{MOCK_DAY_12_CHALLENGE.badgeUnlock}</strong></div>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row gap-3">
-              <Link to="/day/12" className="btn-primary w-full sm:w-auto text-base py-3 px-6">
+            <div className="pt-2">
+              <Link to="/day/12" className="btn-primary w-full sm:w-auto text-sm sm:text-base py-3 px-6 justify-center">
                 Continue Today's Challenge <ArrowRight className="w-5 h-5" />
               </Link>
-              <button onClick={openSecurityModal} className="btn-secondary text-xs py-2.5 px-4 text-emerald-400 border-emerald-500/20">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Tamper-Proof Submission Proof
-              </button>
             </div>
           </section>
 
@@ -528,20 +525,22 @@ export default function DashboardPage({
           {!isFocusMode && (
             <>
               {/* GitHub-style 60-Day Contribution Heatmap Mini Calendar */}
-              <section className="glass-card p-5 space-y-3 relative overflow-hidden border border-white/10">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <GitCommit className="w-5 h-5 text-emerald-400" />
-                    <h3 className="font-bold text-white text-sm font-heading">60-Day Activity Heatmap</h3>
+              <section className="glass-card p-5 space-y-3 relative overflow-hidden border border-white/10 min-h-[230px] flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <GitCommit className="w-5 h-5 text-emerald-400" />
+                      <h3 className="font-bold text-white text-sm font-heading">60-Day Activity Heatmap</h3>
+                    </div>
+                    <span className="text-xs text-gray-400">
+                      {!isLinked ? '🔒 Locked (0/60 Days)' : `${completedDays} / 60 Days Active`}
+                    </span>
                   </div>
-                  <span className="text-xs text-gray-400">
-                    {!isLinked ? '🔒 Locked (0/60 Days)' : `${completedDays} / 60 Days Active`}
-                  </span>
+
+                  <p className="text-xs text-gray-400 mt-1">Visual proof of your daily GitHub commits over the 60-day challenge.</p>
                 </div>
 
-                <p className="text-xs text-gray-400">Visual proof of your daily GitHub commits over the 60-day challenge.</p>
-
-                <div className="relative pt-1">
+                <div className="pt-1">
                   <div className={`heatmap-grid pt-2 transition-all ${!isLinked ? 'filter blur-[3px] opacity-25 pointer-events-none' : ''}`}>
                     {[...Array(60)].map((_, idx) => {
                       const dayNum = idx + 1;
@@ -556,31 +555,31 @@ export default function DashboardPage({
                       );
                     })}
                   </div>
-
-                  {/* Lock Overlay for Unregistered Users */}
-                  {!isLinked && (
-                    <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center p-4 text-center space-y-2.5 z-10 border border-amber-500/40 shadow-2xl">
-                      <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center shadow-lg">
-                        <Lock className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <h4 className="font-black text-white text-sm font-heading tracking-wide">
-                          Commit Activity Heatmap Locked 🔒
-                        </h4>
-                        <p className="text-xs text-amber-200/90 max-w-xs mt-1 leading-relaxed">
-                          Unregistered users cannot record daily green contribution graphs. Link your GitHub & LinkedIn to start your 60-day commit heatmap!
-                        </p>
-                      </div>
-                      <button
-                        onClick={openLinkModal}
-                        className="btn-primary text-xs py-2 px-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:brightness-110 flex items-center gap-1.5 shadow-md"
-                      >
-                        <Flame className="w-4 h-4 text-white" />
-                        <span>Link Git & LinkedIn to Unlock Heatmap</span>
-                      </button>
-                    </div>
-                  )}
                 </div>
+
+                {/* Lock Overlay for Unregistered Users */}
+                {!isLinked && (
+                  <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-md rounded-2xl flex flex-col items-center justify-center p-4 text-center space-y-2.5 z-20 border border-amber-500/40 shadow-2xl">
+                    <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center shadow-lg shrink-0">
+                      <Lock className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-black text-white text-sm font-heading tracking-wide">
+                        Commit Activity Heatmap Locked 🔒
+                      </h4>
+                      <p className="text-xs text-amber-200/90 max-w-xs mt-1 leading-relaxed">
+                        Unregistered users cannot record daily contribution graphs. Link your accounts to start your 60-day commit heatmap!
+                      </p>
+                    </div>
+                    <button
+                      onClick={openLinkModal}
+                      className="btn-primary text-xs py-2 px-4 bg-gradient-to-r from-orange-500 to-amber-500 hover:brightness-110 flex items-center gap-1.5 shadow-md shrink-0 cursor-pointer"
+                    >
+                      <Flame className="w-4 h-4 text-white" />
+                      <span>Link Git & LinkedIn to Unlock Heatmap</span>
+                    </button>
+                  </div>
+                )}
               </section>
 
               {/* Grid Layout: Achievements & Leaderboard */}

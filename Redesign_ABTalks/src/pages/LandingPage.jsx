@@ -30,95 +30,125 @@ export default function LandingPage({ openLinkModal, userAuth, student }) {
     <div className="space-y-16 py-6 px-4">
 
       {/* Hero Section */}
-      <section className="text-center space-y-6 pt-6 pb-10 relative">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-extrabold uppercase tracking-wide">
-          <Flame className="w-4 h-4 text-orange-500 flame-animated" />
-          <span>India's #1 Coding Challenge for College Students</span>
-        </div>
+      <section className="pt-6 pb-10 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Headline, Description & CTAs */}
+          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-extrabold uppercase tracking-wide">
+              <Flame className="w-4 h-4 text-orange-500 flame-animated" />
+              <span>India's #1 Coding Challenge for College Students</span>
+            </div>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black font-heading leading-tight max-w-3xl mx-auto">
-          Transform Your Coding Skills in <span className="gradient-text-fire">60 Days</span>.
-        </h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black font-heading leading-tight">
+              Transform Your Coding Skills in <span className="gradient-text-fire">60 Days</span>.
+            </h1>
 
-        <p className="text-gray-300 text-base sm:text-lg max-w-xl mx-auto font-normal">
-          Build real projects. Push daily GitHub commits. Publish LinkedIn proof. Become recruiter-ready before graduation.
-        </p>
+            <p className="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+              Build real projects. Push daily GitHub commits. Publish LinkedIn proof. Become recruiter-ready before graduation.
+            </p>
 
-        {/* Dynamic ABTalks Student Card (Supports Unregistered vs Registered Mock States) */}
-        <div className="max-w-md mx-auto relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-purple-600 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-          <div className="relative glass-card p-5 border border-white/15 text-left space-y-4 shadow-xl">
-            
-            {!isLinked ? (
-              /* State 1: Unregistered User (Welcoming Empty State) */
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-[10px] uppercase tracking-wider border border-amber-500/30">
-                    WELCOME TO ABTALKS
-                  </span>
-                  <span className="text-xs text-gray-400 font-medium">
-                    Guest Mode
-                  </span>
-                </div>
+            {/* Primary Hero CTA & Security Badge */}
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <button 
+                onClick={handleStartChallenge} 
+                className="btn-primary w-full sm:w-auto text-base px-8 py-3.5 flex items-center justify-center gap-2 cursor-pointer font-bold shadow-xl shadow-orange-500/20"
+              >
+                <span>Start My 60-Day Journey</span> <ArrowRight className="w-5 h-5" />
+              </button>
 
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-white font-heading">
-                    Ready to build 60 projects in 60 days?
-                  </h3>
-                  <p className="text-xs text-gray-300 leading-relaxed">
-                    Link your GitHub & LinkedIn to track your daily streak, push verified code, earn achievements, and unlock recruiter recommendations.
-                  </p>
-                </div>
-
-                <button
-                  onClick={openLinkModal}
-                  className="w-full btn-primary py-3 text-xs flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 font-bold hover:brightness-110 shadow-lg cursor-pointer"
-                >
-                  <span>Start My 60-Day Journey</span> <ArrowRight className="w-4 h-4" />
-                </button>
+              <div className="inline-flex items-center gap-1.5 text-xs text-amber-300 bg-amber-500/10 px-3.5 py-2 rounded-full border border-amber-500/20 shrink-0">
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+                <span>Verification & Security (Upcoming V2)</span>
               </div>
-            ) : (
-              /* State 2: Registered User (Mock Streak, Progress, Submissions, & Rank) */
-              <>
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px] uppercase tracking-wider border border-emerald-500/30">
-                    CHALLENGE COMPLETE
-                  </span>
-                  <span className="text-xs font-bold text-orange-400 flex items-center gap-1 font-heading">
-                    <Flame className="w-3.5 h-3.5 text-orange-500" /> 🔥 {currentStudent.streak}-day learning streak
-                  </span>
+            </div>
+
+            {/* Quick Proof Highlights Row */}
+            <div className="pt-4 grid grid-cols-3 gap-3 border-t border-white/10 text-xs text-gray-300 text-center lg:text-left">
+              <div className="space-y-0.5">
+                <p className="font-bold text-white text-sm font-heading">60 Days</p>
+                <p className="text-[11px] text-gray-400">Structured Curriculum</p>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-bold text-emerald-400 text-sm font-heading">Daily Git</p>
+                <p className="text-[11px] text-gray-400">Public Commit Proof</p>
+              </div>
+              <div className="space-y-0.5">
+                <p className="font-bold text-amber-300 text-sm font-heading">Portfolio</p>
+                <p className="text-[11px] text-gray-400">Recruiter Verified</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Dynamic ABTalks Student Card */}
+          <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-purple-600 rounded-3xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+            <div className="relative glass-card p-6 border border-white/15 text-left space-y-4 shadow-xl">
+              
+              {!isLinked ? (
+                /* State 1: Unregistered User (Welcoming Empty State) */
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-[10px] uppercase tracking-wider border border-amber-500/30">
+                      WELCOME TO ABTALKS
+                    </span>
+                    <span className="text-xs text-gray-400 font-medium">
+                      Guest Mode
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-bold text-white font-heading">
+                      Ready to build 60 projects in 60 days?
+                    </h3>
+                    <p className="text-xs text-gray-300 leading-relaxed">
+                      Link your GitHub & LinkedIn to track your daily streak, push verified code, earn achievements, and unlock recruiter recommendations.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={openLinkModal}
+                    className="w-full btn-primary py-3 text-xs flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 font-bold hover:brightness-110 shadow-lg cursor-pointer"
+                  >
+                    <span>Start My 60-Day Journey</span> <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
-                
-                <div className="space-y-2">
-                  <h3 className="text-base font-bold text-white font-heading">
-                    Today's project has been shipped.
-                  </h3>
-                  <div className="space-y-1 text-xs font-medium">
-                    <div className="flex items-center gap-2 text-emerald-400">
-                      <span>✓ GitHub proof submitted</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-blue-400">
-                      <span>✓ LinkedIn proof submitted</span>
+              ) : (
+                /* State 2: Registered User (Mock Streak, Progress, Submissions, & Rank) */
+                <>
+                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[10px] uppercase tracking-wider border border-emerald-500/30">
+                      CHALLENGE COMPLETE
+                    </span>
+                    <span className="text-xs font-bold text-orange-400 flex items-center gap-1 font-heading">
+                      <Flame className="w-3.5 h-3.5 text-orange-500" /> 🔥 {currentStudent.streak}-day learning streak
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-base font-bold text-white font-heading">
+                      Today's project has been shipped.
+                    </h3>
+                    <div className="space-y-1 text-xs font-medium">
+                      <div className="flex items-center gap-2 text-emerald-400">
+                        <span>✓ GitHub proof submitted</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-blue-400">
+                        <span>✓ LinkedIn proof submitted</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-gray-300">
-                  <span>Progress: {currentStudent.completedDays}/{currentStudent.totalDays} Days</span>
-                  <span className="text-amber-300 font-bold">Rank #{currentStudent.rank} ({currentStudent.topPercentile})</span>
-                </div>
-              </>
-            )}
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-gray-300">
+                    <span>Progress: {currentStudent.completedDays}/{currentStudent.totalDays} Days</span>
+                    <span className="text-amber-300 font-bold">Rank #{currentStudent.rank} ({currentStudent.topPercentile})</span>
+                  </div>
+                </>
+              )}
 
+            </div>
           </div>
-        </div>
 
-
-
-        {/* Security Assurance Badge */}
-        <div className="inline-flex items-center gap-1.5 text-xs text-amber-300 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
-          <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-          <span>GitHub Commit & Certificate Verification (Upcoming V2)</span>
         </div>
       </section>
 
