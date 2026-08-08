@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { 
   Flame, 
@@ -27,6 +27,9 @@ export default function DayChallengePage({
   streakMode = 'BROKEN',
   setStreakMode = () => {}
 }) {
+  const { dayId } = useParams();
+  const currentDay = dayId || '12';
+
   // Submission Form State
   const [githubRepo, setGithubRepo] = useState('');
   const [linkedinPost, setLinkedinPost] = useState('');
@@ -109,11 +112,11 @@ export default function DayChallengePage({
         }`}>
           {submissionStatus === 'VERIFIED' ? (
             <>
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Day 12 Completed 🎉
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Day {currentDay} Completed 🎉
             </>
           ) : (
             <>
-              <Flame className="w-4 h-4" /> Day 12 of 60
+              <Flame className="w-4 h-4" /> Day {currentDay} of 60
             </>
           )}
         </span>
@@ -134,11 +137,11 @@ export default function DayChallengePage({
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
               {submissionStatus === 'VERIFIED' ? (
                 <span className="pill-badge pill-emerald font-bold flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> DAY 12 COMPLETED & VERIFIED 🎉
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> DAY {currentDay} COMPLETED & VERIFIED 🎉
                 </span>
               ) : (
                 <span className="pill-badge pill-orange font-bold">
-                  🔥 DAY 12 CHALLENGE
+                  🔥 DAY {currentDay} CHALLENGE
                 </span>
               )}
 

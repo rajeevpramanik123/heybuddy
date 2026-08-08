@@ -14,7 +14,6 @@ import {
   Users, 
   Quote, 
   Eye,
-  Moon,
   UserX,
   Plus,
   Calendar,
@@ -163,21 +162,6 @@ export default function DashboardPage({
             </div>
           )}
 
-          {/* Night Mode Late Night Coding Reminder Banner */}
-          {isNightMode && (
-            <div className="glass-card bg-indigo-950/60 border-indigo-500/40 p-4 flex items-center justify-between gap-3 text-xs animate-fade-in">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-300 flex items-center justify-center shrink-0">
-                  <Moon className="w-4 h-4 text-amber-300" />
-                </div>
-                <div>
-                  <p className="font-bold text-white">Late Night Coding Mode Active (After College Session)</p>
-                  <p className="text-gray-300">You are committing code late at night. Finish Day 12 to secure today's flame!</p>
-                </div>
-              </div>
-              <span className="pill-badge pill-purple shrink-0">🌙 Night Mode</span>
-            </div>
-          )}
 
           {/* Unregistered User Warning Banner */}
           {!isLinked && (
@@ -299,9 +283,9 @@ export default function DashboardPage({
                 <div className="flex items-center gap-2.5">
                   <Flame className="w-5 h-5 text-amber-400 shrink-0" />
                   <div>
-                    <p className="font-bold text-white">Fresh Streak Started Today (Day 12)! 🌱</p>
+                    <p className="font-bold text-white">Fresh Streak Started Today (0 Days Active) 🌱</p>
                     <p className="text-amber-200">
-                      Your previous record of <strong className="text-amber-300">10 Days 🏆</strong> remains saved. Finish Day 12 to start your new streak flame!
+                      Your streak has been reset to <strong>0 Days</strong>. Your prior max record of <strong className="text-amber-300">10 Days 🏆</strong> remains saved!
                     </p>
                   </div>
                 </div>
@@ -452,8 +436,8 @@ export default function DashboardPage({
               <div className="min-w-0">
                 <p className="text-[10px] text-gray-400 uppercase font-semibold">Momentum Meter</p>
                 <p className="text-xs font-bold text-orange-300 truncate">
-                  {isBrokenStreak 
-                    ? '⚠️ Momentum Interrupted (Streak 0d)' 
+                  {isBrokenStreak || streakMode === 'FRESH'
+                    ? '🌱 Fresh Start (Streak 0d)' 
                     : `🔥 ${Math.round((streakDays / 11) * 100)}% High Velocity (${streakDays} Active Days)`}
                 </p>
               </div>

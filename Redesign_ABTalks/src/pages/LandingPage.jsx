@@ -213,13 +213,13 @@ export default function LandingPage({ openLinkModal, userAuth, student }) {
           <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2 relative">
             <div className="w-7 h-7 rounded-full bg-orange-500 text-white font-bold text-xs flex items-center justify-center">3</div>
             <h4 className="font-bold text-sm font-heading">Submit Proof</h4>
-            <p className="text-xs text-gray-400">Push your GitHub commit SHA and paste your LinkedIn post link.</p>
+            <p className="text-xs text-gray-400">Submit your GitHub repository link and LinkedIn post.</p>
           </div>
 
           <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2 relative">
             <div className="w-7 h-7 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center">4</div>
             <h4 className="font-bold text-sm font-heading">Complete 60 Days</h4>
-            <p className="text-xs text-gray-400">Unlock your cryptographically verified SHA-256 certificate for recruiters.</p>
+            <p className="text-xs text-gray-400">Unlock your certificate.</p>
           </div>
 
         </div>

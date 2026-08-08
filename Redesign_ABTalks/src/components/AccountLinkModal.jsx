@@ -58,6 +58,17 @@ export default function AccountLinkModal({
     navigate('/dashboard');
   };
 
+  const handleContinueWithDemoProfile = () => {
+    onCompleteLinking({
+      github: 'aarav_dev',
+      linkedin: 'https://linkedin.com/in/aarav-sharma-dev',
+      linkedAt: new Date().toISOString()
+    });
+    setStep('choice');
+    setError('');
+    navigate('/dashboard');
+  };
+
   const handleGuestChoice = () => {
     onContinueAsGuest();
     setStep('choice');
@@ -156,20 +167,22 @@ export default function AccountLinkModal({
         ) : (
           /* STEP 2: INPUT GITHUB AND LINKEDIN DETAILS */
           <form onSubmit={handleSubmitLinking} className="space-y-5">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-3 gap-2">
               <div>
                 <h3 className="text-xl font-extrabold text-white font-heading">
                   Connect Profile Accounts
                 </h3>
                 <p className="text-xs text-gray-400">Link accounts to activate streak tracking</p>
               </div>
-              <button
-                type="button"
-                onClick={() => setStep('choice')}
-                className="text-xs text-orange-400 hover:underline"
-              >
-                ← Back
-              </button>
+              <div className="flex items-center gap-2 shrink-0 pr-8 sm:pr-0">
+                <button
+                  type="button"
+                  onClick={handleContinueWithDemoProfile}
+                  className="text-xs text-emerald-400 hover:underline font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20"
+                >
+                  Continue with Demo Profile →
+                </button>
+              </div>
             </div>
 
             {error && (

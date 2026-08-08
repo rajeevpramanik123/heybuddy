@@ -169,7 +169,7 @@ export default function App() {
             />
 
             <Route
-              path="/day/12"
+              path="/day/:dayId?"
               element={
                 <DayChallengePage
                   student={student}
