@@ -286,9 +286,9 @@ export default function DayChallengePage({
 
           <button
             onClick={openSecurityModal}
-            className="text-xs text-emerald-400 hover:underline flex items-center gap-1 font-semibold"
+            className="text-xs text-amber-400 hover:underline flex items-center gap-1 font-semibold bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
           >
-            How it's secure from hacking →
+            🛡️ Security Architecture (Roadmap V2) →
           </button>
         </div>
 

@@ -51,7 +51,7 @@ export default function LiveKanbanSandbox() {
             <span className="px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold text-[10px] uppercase">
               Interactive Prototype Sandbox
             </span>
-            <h3 className="font-bold text-white text-base font-heading">Day 12 Kanban Live Preview</h3>
+            <h3 className="font-bold text-white text-base font-heading">Live preview</h3>
           </div>
           <p className="text-xs text-gray-400 mt-0.5">Test moving tasks across columns directly inside this live demo.</p>
         </div>
