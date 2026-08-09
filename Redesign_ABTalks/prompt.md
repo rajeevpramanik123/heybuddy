@@ -16,6 +16,13 @@ The primary objective of the platform is to solve student coding consistency by 
 
 ---
 
+## 🎥 Video Presentation & Walkthrough
+
+Watch the complete project presentation and feature demonstration:  
+▶️ **[Watch Project Demo on YouTube](https://youtu.be/byoT89AzpVU)**
+
+---
+
 ## 👥 Collaborators & Engineering Team
 
 This project was built collaboratively by three core contributors (as tracked in the repository's git commit history):

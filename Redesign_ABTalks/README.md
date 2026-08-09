@@ -11,6 +11,13 @@
 
 ---
 
+## 🎥 Video Presentation & Walkthrough
+
+Watch our project demo and feature walkthrough:  
+▶️ **[Watch Project Demo on YouTube](https://youtu.be/byoT89AzpVU)**
+
+---
+
 ## 👥 Project Collaborators & Contributors
 
 This project is actively maintained and contributed to by 3 core collaborators tracked in git history:
