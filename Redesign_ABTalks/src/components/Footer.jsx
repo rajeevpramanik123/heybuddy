@@ -11,7 +11,7 @@ export default function Footer() {
     <>
       {/* Desktop & Standard Footer */}
       <footer className="mt-auto border-t border-white/10 bg-slate-950/80 backdrop-blur-md pt-10 pb-16 px-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-5 gap-8">
           
           <div className="space-y-3 md:col-span-2">
             <div className="flex items-center gap-2">
@@ -52,11 +52,26 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-3">Community</h4>
             <div className="flex flex-col space-y-2 text-sm text-gray-400">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition">
-                <Github className="w-4 h-4 text-gray-400" /> GitHub Organization
+              <a href="https://github.com/rajeevpramanik123/heybuddy" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition">
+                <Github className="w-4 h-4 text-gray-400" /> GitHub Repository
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-white transition">
-                <Linkedin className="w-4 h-4 text-blue-400" /> LinkedIn Student Network
+                <Linkedin className="w-4 h-4 text-blue-400" /> LinkedIn Network
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider mb-3">Collaborators</h4>
+            <div className="flex flex-col space-y-1.5 text-xs text-gray-400">
+              <a href="https://github.com/rajeevpramanik123" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-orange-400 transition">
+                <Github className="w-3.5 h-3.5 text-orange-400" /> rajeevpramanik123 (Lead)
+              </a>
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-orange-400 transition">
+                <Github className="w-3.5 h-3.5 text-amber-400" /> Aditi Ansh
+              </a>
+              <a href="https://github.com/RK29-R" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 hover:text-orange-400 transition">
+                <Github className="w-3.5 h-3.5 text-emerald-400" /> RK29-R
               </a>
             </div>
           </div>
