@@ -11,13 +11,23 @@
 
 ---
 
-## ✨ Features
+## 👥 Project Collaborators & Contributors
+
+This project is actively maintained and contributed to by 3 core collaborators tracked in git history:
+
+- 👑 **[rajeevpramanik123](https://github.com/rajeevpramanik123)** — Lead Maintainer & Full-Stack Developer (28 Commits)
+- ⭐️ **[Aditi Ansh](https://github.com/aditiansh8183)** — Frontend & Netlify/Vercel Deployment Contributor (9 Commits)
+- ⚡️ **[RK29-R](https://github.com/RK29-R)** — UI & Architecture Contributor (2 Commits)
+
+---
+
+## ✨ Key Features
 
 - **📱 Mobile-First & Responsive Desktop Layout**: Custom-crafted for mobile screens (390px) and expansive desktop workbenches (1280px / `max-w-7xl`).
 - **🔥 Dynamic Streak & Streak Freeze Engine**: Interactive momentum system with 1-click **Streak Freeze** revival to protect student progress when life happens.
 - **🏆 Student Leaderboard & Achievements**: Real-time peer ranking and badge showcase with graceful state handling for guest/unlinked sessions.
 - **🛠️ Interactive Day Challenge Workbench**: 
-  - **Left Column**: Est. completion time, XP reward, live interactive Kanban sandbox, step-by-step implementation guide, and curated resources.
+  - **Left Column**: Est. completion time, XP reward, live interactive Kanban sandbox, step-by-step checklist, and curated resources.
   - **Right Column**: Sticky **Proof of Work Submission Form** for GitHub & LinkedIn proof.
 - **📋 Streamlined Submission**: Clean submission flow for GitHub Repository URLs and LinkedIn Post proof with instant celebration feedback.
 - **🌙 Night Mode Variant**: High-contrast dark aesthetic tailored for late-night college coding sessions.
@@ -42,7 +52,7 @@ Redesign_ABTalks/
 ├── src/
 │   ├── components/            # Reusable UI Components
 │   │   ├── Navbar.jsx         # Global Header with Mobile Nav & Night Mode
-│   │   ├── Footer.jsx         # Footer with Roadmap Badges & Quick Links
+│   │   ├── Footer.jsx         # Footer with Roadmap Badges, Collaborators & Links
 │   │   ├── DemoSidebar.jsx    # Evaluator State Toggle Controls
 │   │   ├── LiveKanbanSandbox.jsx # Interactive Kanban Sandbox Widget
 │   │   ├── AccountLinkModal.jsx # GitHub & LinkedIn Account Linking Modal
@@ -74,7 +84,7 @@ Redesign_ABTalks/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/ABTalks_Redesign.git
+   git clone https://github.com/rajeevpramanik123/heybuddy.git
    cd Redesign_ABTalks
    ```
 
