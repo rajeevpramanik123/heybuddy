@@ -12,7 +12,9 @@ import {
   ShieldCheck, 
   CheckSquare, 
   ArrowLeft,
-  AlertCircle
+  AlertCircle,
+  UserX,
+  UserCheck
 } from 'lucide-react';
 import { Github, Linkedin } from '../components/Icons';
 import LiveKanbanSandbox from '../components/LiveKanbanSandbox';
@@ -299,157 +301,185 @@ export default function DayChallengePage({
           </button>
         </div>
 
-        {/* Dynamic Verification & Live Stats Change Summary Card */}
-        {submissionStatus === 'VERIFIED' && (
-          <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-emerald-950/80 border-2 border-emerald-500/60 text-white space-y-4 shadow-2xl animate-fade-in">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold font-heading text-white">Today's Task Verified & Locked! 🎉</h3>
-                  <p className="text-xs text-emerald-300">
-                    {isFreezeActive 
-                      ? "Streak Freeze applied & task verified successfully."
-                      : "Fresh Streak Started! Task submitted as Day 1 of new streak flame."}
-                  </p>
-                </div>
-              </div>
-              <span className="pill-badge pill-emerald font-bold">+150 XP</span>
+        {/* Unregistered User Step 1: Prompt to Register & Link Accounts First */}
+        {!isLinked ? (
+          <div className="p-5 rounded-2xl bg-amber-950/40 border border-amber-500/40 space-y-4 text-center animate-fade-in shadow-xl">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto">
+              <UserX className="w-6 h-6" />
             </div>
-
-            {/* Live Metric Changes Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
-                <p className="text-[10px] text-gray-400 uppercase font-semibold">Active Streak</p>
-                <p className="text-xl font-black text-orange-400 font-heading">
-                  {isFreezeActive ? "12 DAYS 🔥" : "1 DAY 🔥"}
-                </p>
-                <p className="text-[9px] text-emerald-400 font-bold">
-                  {isFreezeActive ? "+1 Day Boost" : "New Streak Started"}
-                </p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
-                <p className="text-[10px] text-gray-400 uppercase font-semibold">Highest Record</p>
-                <p className="text-xl font-black text-amber-300 font-heading">
-                  {isFreezeActive ? "12 DAYS 🏆" : "10 DAYS 🏆"}
-                </p>
-                <p className="text-[9px] text-amber-300 font-bold">
-                  {isFreezeActive ? "New Max Record!" : "Prior Max Preserved"}
-                </p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
-                <p className="text-[10px] text-gray-400 uppercase font-semibold">Total XP</p>
-                <p className="text-xl font-black text-purple-400 font-heading">{(student?.xp || 1420) + 150} XP</p>
-                <p className="text-[9px] text-purple-300 font-bold">+150 XP</p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
-                <p className="text-[10px] text-gray-400 uppercase font-semibold">Recruiter Score</p>
-                <p className="text-xl font-black text-indigo-300 font-heading">
-                  {isLinked ? (isFreezeActive ? 95 : 83) : 5}%
-                </p>
-                <p className="text-[9px] text-indigo-300 font-bold">
-                  {isFreezeActive ? "Max Streak Boost (95%)" : "Fresh Streak Base (83%)"}
-                </p>
-              </div>
+            <div className="space-y-1">
+              <h3 className="text-base font-extrabold text-white font-heading">
+                Registration Required
+              </h3>
+              <p className="text-xs text-amber-200">
+                You are currently in <strong>Unregistered Learner Mode</strong>. Please register & link your GitHub & LinkedIn accounts first to unlock submission and record your daily streak flame 🔥
+              </p>
             </div>
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-              <p className="text-xs text-gray-300">Your GitHub repository & LinkedIn proof are verified.</p>
-              <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-xs py-2.5 px-5 bg-gradient-to-r from-emerald-600 to-orange-600 font-bold">
-                View Dashboard & Updated Heatmap →
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {isLinked && !isFreezeActive && submissionStatus !== 'VERIFIED' && (
-          <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>
-                Streak Freeze not activated. Submitting today's task will start your new streak flame from <strong>Day 1 🔥</strong> (preserving your prior record of <strong>10 Days 🏆</strong>).
-              </span>
-            </div>
-            <Link
-              to="/dashboard"
-              onClick={() => setStreakMode('REVIVED')}
-              className="text-[11px] font-bold text-orange-400 hover:underline shrink-0 bg-orange-500/20 px-2.5 py-1 rounded-lg border border-orange-500/30"
-            >
-              🛡️ Activate Freeze (Revive 11d)
-            </Link>
-          </div>
-        )}
-
-        {errorMessage && (
-          <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-
-        {/* Submission Form Inputs */}
-        <form onSubmit={handleFormSubmit} className="space-y-4">
-          
-          {/* GitHub Repo URL */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-              <Github className="w-4 h-4 text-gray-400" /> GitHub Repository URL *
-            </label>
-            <input
-              type="text"
-              required
-              value={githubRepo}
-              onChange={(e) => setGithubRepo(e.target.value)}
-              placeholder="https://github.com/your-username/day12-kanban-board"
-              className="w-full bg-black/40 border border-white/10 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white outline-none transition"
-              disabled={submissionStatus === 'VERIFIED'}
-            />
-          </div>
-
-          {/* LinkedIn Post URL */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
-              <Linkedin className="w-4 h-4 text-blue-400" /> LinkedIn Post URL *
-            </label>
-            <input
-              type="text"
-              required
-              value={linkedinPost}
-              onChange={(e) => setLinkedinPost(e.target.value)}
-              placeholder="https://www.linkedin.com/posts/yourname_abtalks60day-day12-activity-..."
-              className="w-full bg-black/40 border border-white/10 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white outline-none transition"
-              disabled={submissionStatus === 'VERIFIED'}
-            />
-          </div>
-
-          {/* Submit Button & Simple Progress Note */}
-          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <p className="text-[11px] text-gray-400">
-              Your GitHub and LinkedIn links help record your progress.
-            </p>
-
             <button
-              type="submit"
-              disabled={submissionStatus === 'SUBMITTING' || submissionStatus === 'VERIFIED'}
-              className="btn-primary py-3 px-6 text-xs bg-gradient-to-r from-emerald-600 to-orange-600 hover:from-emerald-500 hover:to-orange-500 disabled:opacity-50 shrink-0"
+              type="button"
+              onClick={openLinkModal}
+              className="btn-primary w-full py-3 text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 font-extrabold flex items-center justify-center gap-2 cursor-pointer"
             >
-              {submissionStatus === 'SUBMITTING' ? (
-                <span>Verifying...</span>
-              ) : submissionStatus === 'VERIFIED' ? (
-                <span>Completed & Verified ✓</span>
-              ) : (
-                <span className="flex items-center gap-1.5">
-                  <Send className="w-4 h-4" /> Submit Today's Proof
-                </span>
-              )}
+              <UserCheck className="w-4 h-4" />
+              <span>Register & Link Accounts Now</span>
             </button>
           </div>
-        </form>
+        ) : (
+          /* Registered User Step 2 & 3: GitHub & LinkedIn Form Inputs and Task Completion Info */
+          <>
+            {/* Dynamic Verification & Live Stats Change Summary Card */}
+            {submissionStatus === 'VERIFIED' && (
+              <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-emerald-950/80 border-2 border-emerald-500/60 text-white space-y-4 shadow-2xl animate-fade-in">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                      <CheckCircle2 className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold font-heading text-white">Today's Task Verified & Locked! 🎉</h3>
+                      <p className="text-xs text-emerald-300">
+                        {isFreezeActive 
+                          ? "Streak Freeze applied & task verified successfully."
+                          : "Fresh Streak Started! Task submitted as Day 1 of new streak flame."}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="pill-badge pill-emerald font-bold">+150 XP</span>
+                </div>
+
+                {/* Live Metric Changes Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
+                    <p className="text-[10px] text-gray-400 uppercase font-semibold">Active Streak</p>
+                    <p className="text-xl font-black text-orange-400 font-heading">
+                      {isFreezeActive ? "12 DAYS 🔥" : "1 DAY 🔥"}
+                    </p>
+                    <p className="text-[9px] text-emerald-400 font-bold">
+                      {isFreezeActive ? "+1 Day Boost" : "New Streak Started"}
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
+                    <p className="text-[10px] text-gray-400 uppercase font-semibold">Highest Record</p>
+                    <p className="text-xl font-black text-amber-300 font-heading">
+                      {isFreezeActive ? "12 DAYS 🏆" : "10 DAYS 🏆"}
+                    </p>
+                    <p className="text-[9px] text-amber-300 font-bold">
+                      {isFreezeActive ? "New Max Record!" : "Prior Max Preserved"}
+                    </p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
+                    <p className="text-[10px] text-gray-400 uppercase font-semibold">Total XP</p>
+                    <p className="text-xl font-black text-purple-400 font-heading">{(student?.xp || 1420) + 150} XP</p>
+                    <p className="text-[9px] text-purple-300 font-bold">+150 XP</p>
+                  </div>
+
+                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 space-y-0.5">
+                    <p className="text-[10px] text-gray-400 uppercase font-semibold">Recruiter Score</p>
+                    <p className="text-xl font-black text-indigo-300 font-heading">
+                      {isLinked ? (isFreezeActive ? 95 : 83) : 5}%
+                    </p>
+                    <p className="text-[9px] text-indigo-300 font-bold">
+                      {isFreezeActive ? "Max Streak Boost (95%)" : "Fresh Streak Base (83%)"}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+                  <p className="text-xs text-gray-300">Your GitHub repository & LinkedIn proof are verified.</p>
+                  <Link to="/dashboard" className="btn-primary w-full sm:w-auto text-xs py-2.5 px-5 bg-gradient-to-r from-emerald-600 to-orange-600 font-bold">
+                    View Dashboard & Updated Heatmap →
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {isLinked && !isFreezeActive && submissionStatus !== 'VERIFIED' && (
+              <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Flame className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>
+                    Streak Freeze not activated. Submitting today's task will start your new streak flame from <strong>Day 1 🔥</strong> (preserving your prior record of <strong>10 Days 🏆</strong>).
+                  </span>
+                </div>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setStreakMode('REVIVED')}
+                  className="text-[11px] font-bold text-orange-400 hover:underline shrink-0 bg-orange-500/20 px-2.5 py-1 rounded-lg border border-orange-500/30"
+                >
+                  🛡️ Activate Freeze (Revive 11d)
+                </Link>
+              </div>
+            )}
+
+            {errorMessage && (
+              <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/40 text-red-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
+            {/* Submission Form Inputs */}
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              
+              {/* GitHub Repo URL */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                  <Github className="w-4 h-4 text-gray-400" /> GitHub Repository URL *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={githubRepo}
+                  onChange={(e) => setGithubRepo(e.target.value)}
+                  placeholder="https://github.com/your-username/day12-kanban-board"
+                  className="w-full bg-black/40 border border-white/10 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white outline-none transition"
+                  disabled={submissionStatus === 'VERIFIED'}
+                />
+              </div>
+
+              {/* LinkedIn Post URL */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-gray-300 flex items-center gap-1.5">
+                  <Linkedin className="w-4 h-4 text-blue-400" /> LinkedIn Post URL *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={linkedinPost}
+                  onChange={(e) => setLinkedinPost(e.target.value)}
+                  placeholder="https://www.linkedin.com/posts/yourname_abtalks60day-day12-activity-..."
+                  className="w-full bg-black/40 border border-white/10 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white outline-none transition"
+                  disabled={submissionStatus === 'VERIFIED'}
+                />
+              </div>
+
+              {/* Submit Button & Simple Progress Note */}
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <p className="text-[11px] text-gray-400">
+                  Your GitHub and LinkedIn links help record your progress.
+                </p>
+
+                <button
+                  type="submit"
+                  disabled={submissionStatus === 'SUBMITTING' || submissionStatus === 'VERIFIED'}
+                  className="btn-primary py-3 px-6 text-xs bg-gradient-to-r from-emerald-600 to-orange-600 hover:from-emerald-500 hover:to-orange-500 disabled:opacity-50 shrink-0"
+                >
+                  {submissionStatus === 'SUBMITTING' ? (
+                    <span>Verifying...</span>
+                  ) : submissionStatus === 'VERIFIED' ? (
+                    <span>Completed & Verified ✓</span>
+                  ) : (
+                    <span className="flex items-center gap-1.5">
+                      <Send className="w-4 h-4" /> Submit Today's Proof
+                    </span>
+                  )}
+                </button>
+              </div>
+            </form>
+          </>
+        )}
 
       </section>
         </div>
